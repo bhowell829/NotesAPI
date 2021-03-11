@@ -1,16 +1,18 @@
-﻿Starting application
+﻿# Starting application
 
-Command line:
+## Command line:
 Go to project path
-#Build
+
+### Build
 dotnet build
-# Run
+
+### Run
 dotnet run
 
-Visual Studio:
+## Visual Studio:
 Build and run NotesAPI as startup project
 
-Testing API:
+## Testing API:
 Run web app from one of steps above
 Install and open Postman
 
