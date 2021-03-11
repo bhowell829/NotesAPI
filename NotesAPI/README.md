@@ -13,9 +13,8 @@ dotnet run
 Build and run NotesAPI as startup project
 
 ## Testing API:
-Run web app from one of steps above
-
-Install and open Postman
+1. Run web app from one of steps above
+2. Install and open Postman
 
 
 
