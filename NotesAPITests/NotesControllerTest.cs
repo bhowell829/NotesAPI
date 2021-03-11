@@ -20,7 +20,8 @@ namespace NotesAPITests
         [Fact]
         public void GetNotes()
         {
-            var response = _notesController.GetNotes();
+            var controller = new NotesController();
+            var response = controller.GetNotes();
 
             Assert.IsType<List<Note>>(response);
             Assert.Equal(3, response.Count);
@@ -29,17 +30,32 @@ namespace NotesAPITests
         [Fact]
         public void GetNote()
         {
-            var response = _notesController.GetNote(3);
+            var controller = new NotesController();
+            var response = controller.GetNote(3);
 
             Assert.Equal(3, response.Id);
         }
 
         [Fact]
+        public void PutNote()
+        {
+            var controller = new NotesController();
+            var updatedNote = new Note() { Id = 2, Title = "Hobby", Body = "Play hockey", IsComplete = true };
+            controller.UpdateNote(2, updatedNote);
+            var notes = controller.GetNotes();
+            var note = notes.SingleOrDefault(x => x.Id == 2);
+
+            Assert.Equal("Hobby", note.Title);
+            Assert.Equal("Play hockey", note.Body);
+        }
+
+        [Fact]
         public void PostNote()
         {
+            var controller = new NotesController();
             var newNote = new Note() { Id = 5, Title = "Hobby", Body = "Play hockey", IsComplete = true };
-            var response = _notesController.AddNote(newNote);
-            var notes = _notesController.GetNotes();
+            var response = controller.AddNote(newNote);
+            var notes = controller.GetNotes();
             var note = notes.SingleOrDefault(x => x.Id == 5);
 
             Assert.Equal(5, note.Id);
@@ -48,8 +64,9 @@ namespace NotesAPITests
         [Fact]
         public void DeleteNote()
         {
-            _notesController.DeleteNote(1);
-            var notes = _notesController.GetNotes();
+            var controller = new NotesController();
+            controller.DeleteNote(1);
+            var notes = controller.GetNotes();
 
             Assert.False(notes.All(x => x.Id == 1));
         }
